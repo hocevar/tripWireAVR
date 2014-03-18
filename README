@@ -1,0 +1,25 @@
+*****************************
+Laser tripwire for nikon
+*****************************
+
+You are looking at a code for laser tripwire for nikon. It's made of attiny 13a, Light Dependent Resistor (LDR), ir led and some switches and resistors. The idea is that you have a laser pointed at LDR and when the laser is interrupted attiny sends IR signal that triggers camera (tested on nikon d90 and nikon j1. It should work on any nikon camera that supports ML-L3 wireless trigger). On a camera you have to switch to remote control. You have a few different modes when it laser is triggered. Mode 0 (both mode switches off) takes only one shot. Mode 1 (active switch on PB0) sends signal 5 times (usually you won't get that many photos). Mode 2 (active switch on PB1) is not yet implemented. Mode 3 (both switches active) in used for updating the value when laser is active and calculating the appropriate threshold. 
+
+To compile just use make. If you use any other avr microprocessor you have to edit make file accordingly. If you use other avr microprocessor take care with port assignment. 
+
+/*
+	Modes:   [PB1, PB0] - binary
+	  
+		- mode 0 -> one shot
+		- mode 1 -> m1shots(5) shots
+		- mode 2 -> m2time seconds
+		- mode 3 -> read laserValue
+*/
+/*
+	Connections:
+		- PB0 & PB1 -> mode switch
+		- PB4 -> IR led
+		- PB3 -> ADC input
+
+*/
+
+
